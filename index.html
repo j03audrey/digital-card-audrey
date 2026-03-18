@@ -1,71 +1,448 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Audrey Digital Business Card</title>
-  <meta http-equiv="refresh" content="0; url=./%E6%95%B8%E4%BD%8D%E5%90%8D%E7%89%87/digital-card-audrey.html">
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f4f7fb;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --link: #1d4ed8;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沈宛徵 · 營養師</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    * { box-sizing: border-box; }
+:root {
+  --bg: #F9F9F8;
+  --surface: #FFFFFF;
+  --border: #E8E8E5;
+  --text-primary: #1A1A18;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #ABABAB;
+  --accent: #2F6FED;
+  --accent-light: #EBF1FD;
+  --radius: 12px;
+  --transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at 20% 20%, #ffffff, var(--bg));
-      color: var(--text);
-      padding: 24px;
-    }
+html, body {
+  height: 100%;
+  font-family: 'Noto Sans TC', sans-serif;
+}
 
-    main {
-      max-width: 620px;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 4px 20px rgba(31, 41, 55, 0.08);
-    }
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.25rem;
+  transition: background var(--transition);
+  cursor: default;
+  position: relative;
+  overflow-x: hidden;
+}
 
-    h1 {
-      font-size: 1.2rem;
-      margin: 0 0 10px;
-    }
+/* Subtle grid texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity var(--transition);
+}
 
-    p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.75rem 2.25rem 2.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
-    a {
-      color: var(--link);
-      text-decoration: none;
-      font-weight: 600;
-    }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-    a:hover,
-    a:focus-visible {
-      text-decoration: underline;
-    }
-  </style>
+/* ── Photo ── */
+.photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  animation: rise 0.8s 0.1s both;
+}
+
+.photo-frame {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.35s, transform 0.35s;
+}
+
+.photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(47,111,237,0.18), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.photo-frame:hover {
+  box-shadow: 0 0 0 4px rgba(47,111,237,0.15), 0 8px 24px rgba(47,111,237,0.12);
+  transform: scale(1.04);
+}
+.photo-frame:hover::after { opacity: 1; }
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── Identity ── */
+.identity {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  animation: rise 0.8s 0.18s both;
+}
+
+.name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.tagline {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.tagline strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1.5rem 0;
+  animation: rise 0.8s 0.22s both;
+}
+
+/* ── Bio ── */
+.bio {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  animation: rise 0.8s 0.26s both;
+}
+
+.bio-title {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.85rem;
+}
+
+.tag {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: #F4F4F2;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s;
+}
+.tag:hover { background: var(--accent-light); color: var(--accent); border-color: rgba(47,111,237,0.2); }
+
+/* ── Contact ── */
+.contact {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 1.75rem;
+  animation: rise 0.8s 0.3s both;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.contact-icon {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: var(--accent-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.contact a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 12px;
+  transition: opacity 0.2s;
+}
+.contact a:hover { opacity: 0.7; }
+
+/* ── Social Buttons ── */
+.social-section {
+  animation: rise 0.8s 0.36s both;
+}
+
+.social-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.social-btn.ig::before  { background: linear-gradient(135deg, rgba(240,148,51,0.07), rgba(188,24,136,0.07)); }
+.social-btn.fb::before  { background: rgba(24,119,242,0.05); }
+.social-btn.thr::before { background: rgba(0,0,0,0.03); }
+
+.social-btn:hover { border-color: rgba(0,0,0,0.12); transform: translateX(3px); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.social-btn:hover::before { opacity: 1; }
+.social-btn:active { transform: translateX(1px) scale(0.99); }
+
+.btn-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+}
+.ig   .btn-icon { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366); }
+.fb   .btn-icon { background: #1877F2; }
+.thr  .btn-icon { background: #1c1c1c; }
+
+.btn-text {
+  position: relative; z-index: 1;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.btn-arrow {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--text-tertiary);
+  position: relative; z-index: 1;
+  transition: transform 0.2s, color 0.2s;
+}
+.social-btn:hover .btn-arrow { transform: translateX(3px); color: var(--text-secondary); }
+
+/* ── Footer hint ── */
+.footer {
+  text-align: center;
+  margin-top: 1.75rem;
+  animation: rise 0.8s 0.44s both;
+}
+
+.hint {
+  font-size: 10.5px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
+}
+
+.hint span {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--current-dot, #ABABAB);
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: background 0.4s;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card { padding: 2.25rem 1.75rem 2rem; border-radius: 14px; }
+  .name { font-size: 1.45rem; }
+}
+</style>
 </head>
-<body>
-  <main>
-    <h1>Redirecting to Audrey's digital business card...</h1>
-    <p>
-      If redirection does not start automatically, open
-      <a href="./數位名片/digital-card-audrey.html">the business card page</a>.
-    </p>
-  </main>
+<body id="body">
+
+<div class="card">
+
+  <div class="photo-section">
+    <div class="photo-frame" id="photoFrame">
+      <img src="數位名片/S__93888589_0.jpg" alt="沈宛徵 營養師" id="photo">
+    </div>
+  </div>
+
+  <div class="identity">
+    <div class="name">沈宛徵</div>
+    <div class="tagline">熱愛<strong>美食</strong>的&nbsp;臺灣國家高考<strong>營養師</strong></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="bio">
+    <span class="bio-title">關於我</span>
+    三個孩子的媽、營養師、美食探索家。致力透過專業諮詢與健康教育，讓每個人都能吃得好、活得健康。
+    <div class="services">
+      <span class="tag">營養門診</span>
+      <span class="tag">遠距醫療</span>
+      <span class="tag">保健食品</span>
+      <span class="tag">企業講座</span>
+      <span class="tag">美食探索</span>
+      <span class="tag">運動營養</span>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="contact-icon">✉</div>
+    合作・演講邀約：<a href="mailto:j03audrey@gmail.com">j03audrey@gmail.com</a>
+  </div>
+
+  <div class="social-section">
+    <span class="social-label">社群連結</span>
+    <div class="social-buttons">
+      <a class="social-btn ig" href="https://www.instagram.com/j03audrey?igsh=MTU3Y3NmbjlkdnA4bg%3D%3D&utm_source=qr" target="_blank" rel="noopener">
+        <span class="btn-icon">📸</span>
+        <span class="btn-text">Instagram</span>
+        <span class="btn-arrow">›</span>
+      </a>
+      <a class="social-btn fb" href="https://www.facebook.com/share/1GCytJ5Yg7/?mibextid=wwXIfr" target="_blank" rel="noopener">
+        <span class="btn-icon">👤</span>
+        <span class="btn-text">Facebook</span>
+        <span class="btn-arrow">›</span>
+      </a>
+      <a class="social-btn thr" href="https://www.threads.com/@j03audrey?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">
+        <span class="btn-icon">🧵</span>
+        <span class="btn-text">Threads</span>
+        <span class="btn-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="hint">點擊背景切換藍色心情 <span id="dot"></span></span>
+  </div>
+
+</div>
+
+<script>
+// Blue-family background palettes
+const palettes = [
+  { bg: '#F5F8FF', grid: 'rgba(47,111,237,0.04)', dot: '#BFD1F9', name: '晴空藍' },
+  { bg: '#EEF3FB', grid: 'rgba(47,111,237,0.05)', dot: '#93B4F2', name: '霧藍' },
+  { bg: '#E8F0FE', grid: 'rgba(30,80,200,0.06)', dot: '#6B9DEF', name: '天青' },
+  { bg: '#F0F5FF', grid: 'rgba(60,120,230,0.04)', dot: '#A3C0F8', name: '月白' },
+  { bg: '#EBF4FB', grid: 'rgba(14,90,180,0.05)', dot: '#7AB8E8', name: '冰藍' },
+  { bg: '#F4F7FE', grid: 'rgba(50,100,220,0.035)', dot: '#B8CBF5', name: '薰衣' },
+];
+
+let currentIdx = -1;
+const body = document.getElementById('body');
+const dot = document.getElementById('dot');
+
+body.addEventListener('click', (e) => {
+  if (e.target.closest('.card')) return;
+  currentIdx = (currentIdx + 1) % palettes.length;
+  applyPalette(palettes[currentIdx]);
+});
+
+function applyPalette(p) {
+  body.style.background = p.bg;
+  dot.style.background = p.dot;
+  dot.title = p.name;
+  // update grid color via inline style injection
+  const existing = document.getElementById('grid-style');
+  const el = existing || document.createElement('style');
+  el.id = 'grid-style';
+  el.textContent = `body::before { background-image: linear-gradient(${p.grid} 1px, transparent 1px), linear-gradient(90deg, ${p.grid} 1px, transparent 1px); }`;
+  if (!existing) document.head.appendChild(el);
+}
+
+// Photo hover glow + click bounce
+const frame = document.getElementById('photoFrame');
+const photo = document.getElementById('photo');
+let bouncing = false;
+
+frame.addEventListener('click', () => {
+  if (bouncing) return;
+  bouncing = true;
+  photo.style.transition = 'transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+  photo.style.transform = 'scale(1.12)';
+  setTimeout(() => {
+    photo.style.transform = 'scale(1)';
+    setTimeout(() => { bouncing = false; }, 450);
+  }, 320);
+});
+</script>
 </body>
 </html>

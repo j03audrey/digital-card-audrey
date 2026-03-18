@@ -4,7 +4,8 @@ Personal digital business card website for Audrey (registered nutritionist in Ta
 
 ## Live Card
 
-- Main page: `數位名片/digital-card-audrey.html`
+- Main page: `index.html`
+- Alternate file: `數位名片/digital-card-audrey.html`
 
 ## Repository Structure
 
